@@ -19,7 +19,6 @@ import com.valyrian.core.main.MainClass;
 public class OpenMainChest implements Listener {
 	
 	Random r = new Random();
-	private int chestnumber = 0;
 	String prefix = "§7[§bValyrian§7] §a";
 	
 	private boolean isChest() {
@@ -57,32 +56,38 @@ public class OpenMainChest implements Listener {
 					
 					//Legendary
 					if (chestnumber == 1) {
-						
+						p.sendMessage(prefix + "You got §d§kO§r§b§lLEGENDARY CHEST§d§kO§r§a! Congratulations!");
+						return;
 					}
 					
 					//Ultra Rare
 					else if (chestnumber > 0 && chestnumber <= 10) {
-						
+						p.sendMessage(prefix + "You got §c§l§oUltra Rare Chest§a! Congratulations!");
+						return;
 					}
 					
 					//Super Rare
 					else if (chestnumber > 10 && chestnumber <= 50) {
-						
+						p.sendMessage(prefix + "You got §6§lSuper Rare Chest§a! Well Done!");
+						return;
 					}
 					
 					//Rare
 					else if (chestnumber > 50 && chestnumber <= 150) {
-						
+						p.sendMessage(prefix + "You got §eRare Chest§a! Nice!");
+						return;
 					}
 					
 					//Uncommon
 					else if (chestnumber > 150 && chestnumber <= 400) {
-						
+						p.sendMessage(prefix + "You got §3Uncommon Chest§a!");
+						return;
 					}
 					
 					//Common
 					else if (chestnumber > 400 && chestnumber <= 1000) {
-						
+						p.sendMessage(prefix + "You got §7Common Chest§a!");
+						return;
 					}
 				}	
 			}
