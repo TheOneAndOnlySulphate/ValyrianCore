@@ -69,11 +69,11 @@ public class LootChestCommand impements CommandExecutor {
   }
   
   public Block getSelectedBlock(Player p) {
-		
-		Block b = p.getTargetBlock((HashSet<Byte>) null, 100);
-		
-		return b;
-		
+	
+	Block b = p.getTargetBlock((HashSet<Byte>) null, 100);
+	
+	return b;
+	
 	}
   
 }
