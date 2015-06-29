@@ -6,7 +6,7 @@ public class LootChestCommand implements CommandExecutor {
 
   private main plugin;
   
-  plugin LootChestCommand(main plugin) {
+  plugin LootChestCommand(MainClass plugin) {
     this.plugin = plugin;
   }
   
