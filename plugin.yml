@@ -1,0 +1,8 @@
+name: ValyrianCore
+main: com.valyrian.core.main.MainClass
+version: 1.0
+commands:
+  lootchest:
+    description: Modifies the LootChest.
+  addkey:
+    description: Adds a key to open the LootChest.
