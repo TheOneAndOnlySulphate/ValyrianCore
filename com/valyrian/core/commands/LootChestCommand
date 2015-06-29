@@ -34,11 +34,11 @@ public class LootChestCommand impements CommandExecutor {
           
             if (getSelectedBlock(p).getTypeId() == 54) {
             
-              plugin.getConfig().set("Chest.X", getSelectedBlock(p).getX());
-							plugin.getConfig().set("Chest.Y", getSelectedBlock(p).getY());
-							plugin.getConfig().set("Chest.Z", getSelectedBlock(p).getZ());
+             	plugin.getConfig().set("Chest.X", getSelectedBlock(p).getX());
+		plugin.getConfig().set("Chest.Y", getSelectedBlock(p).getY());
+		plugin.getConfig().set("Chest.Z", getSelectedBlock(p).getZ());
 							
-							plugin.saveConfig();
+		plugin.saveConfig();
               
               p.sendMessage(prefix + "Chest for loot created.");
             
