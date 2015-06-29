@@ -30,8 +30,7 @@ public class LootChestCommand implements CommandExecutor {
 
 				if (args.length == 0) {
 
-					p.sendMessage(prefix
-							+ "Type §c/chestloot help for a list of commands");
+					p.sendMessage(prefix + "Type §c/chestloot help for a list of commands");
 
 				} else if (args.length == 1) {
 
@@ -57,14 +56,35 @@ public class LootChestCommand implements CommandExecutor {
 
 						} else {
 
-							p.sendMessage(prefix
-									+ "§cThe target block is not a chest");
+							p.sendMessage(prefix + "§cThe target block is not a chest");
 
 						}
 
 					} else if (args[0].equalsIgnoreCase("delete")) {
 
 						if (getSelectedBlock(p).getTypeId() == 54) {
+							
+							if (getSelectedBlock(p).getX() == plugin.getConfig().getInt("Chest.X")
+									&& getSelectedBlock(p).getY() == plugin.getConfig().getInt("Chest.Y")
+									&& getSelectedBlock(p).getZ() == plugin.getConfig().getInt("Chest.Z")) {
+								
+								plugin.getConfig().set("Chest.X", null);
+								plugin.getConfig().set("Chest.Y", null);
+								plugin.getConfig().set("Chest.Z", null);
+								
+								plugin.saveConfig();
+								
+								p.sendMessage(prefix + "Chest for loot deleted.");
+								
+							} else {
+								
+								p.sendMessage(prefix + "§cThe target block is not a chest for loot.");
+								
+							}
+
+						} else {
+
+							p.sendMessage(prefix + "§cThe target block is not a chest");
 
 						}
 
