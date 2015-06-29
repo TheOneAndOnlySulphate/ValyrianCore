@@ -3,6 +3,7 @@ package com.valyrian.core.commands;
 import java.util.HashSet;
 
 import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,81 +13,89 @@ import com.valyrian.core.main.MainClass;
 
 public class LootChestCommand implements CommandExecutor {
 
-	private MainClass plugin;
+	private MainClass plugin = MainClass.get();
 
-	public LootChestCommand(MainClass plugin) {
-		this.plugin = plugin;
-	}
-
-	public boolean onCommand(CommandSender sender, Command cmd, String c,
-			String[] args) {
+	public boolean onCommand(CommandSender sender, Command cmd, String c, String[] args) {
 		Player p = (Player) sender;
 
 		String prefix = "§7[§bValyrian§7] §a";
 
-		if (c.equalsIgnoreCase("lootchest")) {
+		if (!(p.hasPermission("lootchest.admin"))) {
+			
+			p.sendMessage(prefix + "You do not have permission to modify LootChests!");
+			
+			return true;
+			
+		}
+		
+		else {
 
-			if (p.hasPermission("lootchest.admin")) {
+			if (args.length == 0) {
 
-				if (args.length == 0) {
+				p.sendMessage(prefix + "Type §c/chestloot help for a list of commands");
+				
+				return true;
 
-					p.sendMessage(prefix + "Type §c/chestloot help for a list of commands");
+			} else if (args.length == 1) {
 
-				} else if (args.length == 1) {
+				if (args[0].equalsIgnoreCase("help")) {
 
-					if (args[0].equalsIgnoreCase("help")) {
+					p.sendMessage("/lootchest create - Sets a chest for loot");
+					p.sendMessage("/lootchest delete - Removes a chest for loot");
+					
+					return true;
 
-						p.sendMessage("/lootchest create - Sets a chest for loot");
-						p.sendMessage("/lootchest delete - Removes a chest for loot");
+				} else if (args[0].equalsIgnoreCase("create")) {
 
-					} else if (args[0].equalsIgnoreCase("create")) {
+					if (getSelectedBlock(p) instanceof Chest) {
 
-						if (getSelectedBlock(p).getTypeId() == 54) {
+						plugin.getConfig().set("Chest.X", getSelectedBlock(p).getX());
+						plugin.getConfig().set("Chest.Y", getSelectedBlock(p).getY());
+						plugin.getConfig().set("Chest.Z", getSelectedBlock(p).getZ());
 
-							plugin.getConfig().set("Chest.X",
-									getSelectedBlock(p).getX());
-							plugin.getConfig().set("Chest.Y",
-									getSelectedBlock(p).getY());
-							plugin.getConfig().set("Chest.Z",
-									getSelectedBlock(p).getZ());
+						plugin.saveConfig();
 
-							plugin.saveConfig();
+						p.sendMessage(prefix + "LootChest created.");
+						
+						return true;
 
-							p.sendMessage(prefix + "Chest for loot created.");
+					} else {
 
-						} else {
+						p.sendMessage(prefix + "§cThe target block is not a chest");
+						
+						return true;
 
-							p.sendMessage(prefix + "§cThe target block is not a chest");
+					}
 
-						}
+				} else if (args[0].equalsIgnoreCase("delete")) {
 
-					} else if (args[0].equalsIgnoreCase("delete")) {
-
-						if (getSelectedBlock(p).getTypeId() == 54) {
+					if (getSelectedBlock(p) instanceof Chest) {
 							
-							if (getSelectedBlock(p).getX() == plugin.getConfig().getInt("Chest.X")
-									&& getSelectedBlock(p).getY() == plugin.getConfig().getInt("Chest.Y")
-									&& getSelectedBlock(p).getZ() == plugin.getConfig().getInt("Chest.Z")) {
+						if (getSelectedBlock(p).getX() == plugin.getConfig().getInt("Chest.X") && getSelectedBlock(p).getY() == plugin.getConfig().getInt("Chest.Y") && getSelectedBlock(p).getZ() == plugin.getConfig().getInt("Chest.Z")) {
 								
-								plugin.getConfig().set("Chest.X", null);
-								plugin.getConfig().set("Chest.Y", null);
-								plugin.getConfig().set("Chest.Z", null);
+							plugin.getConfig().set("Chest.X", null);
+							plugin.getConfig().set("Chest.Y", null);
+							plugin.getConfig().set("Chest.Z", null);
 								
-								plugin.saveConfig();
+							plugin.saveConfig();
 								
-								p.sendMessage(prefix + "Chest for loot deleted.");
+							p.sendMessage(prefix + "LootChest deleted.");
+							
+							return true;
 								
-							} else {
-								
-								p.sendMessage(prefix + "§cThe target block is not a chest for loot.");
-								
-							}
-
 						} else {
-
-							p.sendMessage(prefix + "§cThe target block is not a chest");
-
+								
+							p.sendMessage(prefix + "§cThe target block is not a LootChest.");
+								
+							return true;
+							
 						}
+
+					} else {
+
+						p.sendMessage(prefix + "§cThe target block is not a chest");
+						
+						return true;
 
 					}
 
@@ -96,10 +105,11 @@ public class LootChestCommand implements CommandExecutor {
 
 		}
 
-		return false;
+	return false;
 
-	}
+}
 
+	@SuppressWarnings("deprecation")
 	public Block getSelectedBlock(Player p) {
 
 		Block b = p.getTargetBlock((HashSet<Byte>) null, 100);
