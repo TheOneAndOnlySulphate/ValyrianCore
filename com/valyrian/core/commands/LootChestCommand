@@ -15,25 +15,34 @@ public class LootChestCommand implements CommandExecutor {
 
 	private MainClass plugin = MainClass.get();
 
-	public boolean onCommand(CommandSender sender, Command cmd, String c, String[] args) {
+	public boolean onCommand(CommandSender sender, Command cmd, String c,
+			String[] args) {
 		Player p = (Player) sender;
 
 		String prefix = "§7[§bValyrian§7] §a";
-
-		if (!(p.hasPermission("lootchest.admin"))) {
+		
+		if (!(sender instanceof Player)) {
 			
-			p.sendMessage(prefix + "You do not have permission to modify LootChests!");
+			sender.sendMessage(prefix + "§cOnly a player can run that command!");
 			
 			return true;
 			
 		}
-		
-		else {
+
+		if (!(p.hasPermission("vc.lootchest.admin"))) {
+
+			p.sendMessage(prefix
+					+ "You do not have permission to modify LootChests!");
+
+			return true;
+
+		} else {
 
 			if (args.length == 0) {
 
-				p.sendMessage(prefix + "Type §c/chestloot help for a list of commands");
-				
+				p.sendMessage(prefix
+						+ "Type §c/chestloot help for a list of commands");
+
 				return true;
 
 			} else if (args.length == 1) {
@@ -42,27 +51,31 @@ public class LootChestCommand implements CommandExecutor {
 
 					p.sendMessage("/lootchest create - Sets a chest for loot");
 					p.sendMessage("/lootchest delete - Removes a chest for loot");
-					
+
 					return true;
 
 				} else if (args[0].equalsIgnoreCase("create")) {
 
 					if (getSelectedBlock(p) instanceof Chest) {
 
-						plugin.getConfig().set("Chest.X", getSelectedBlock(p).getX());
-						plugin.getConfig().set("Chest.Y", getSelectedBlock(p).getY());
-						plugin.getConfig().set("Chest.Z", getSelectedBlock(p).getZ());
+						plugin.getConfig().set("Chest.X",
+								getSelectedBlock(p).getX());
+						plugin.getConfig().set("Chest.Y",
+								getSelectedBlock(p).getY());
+						plugin.getConfig().set("Chest.Z",
+								getSelectedBlock(p).getZ());
 
 						plugin.saveConfig();
 
 						p.sendMessage(prefix + "LootChest created.");
-						
+
 						return true;
 
 					} else {
 
-						p.sendMessage(prefix + "§cThe target block is not a chest");
-						
+						p.sendMessage(prefix
+								+ "§cThe target block is not a chest");
+
 						return true;
 
 					}
@@ -70,31 +83,38 @@ public class LootChestCommand implements CommandExecutor {
 				} else if (args[0].equalsIgnoreCase("delete")) {
 
 					if (getSelectedBlock(p) instanceof Chest) {
-							
-						if (getSelectedBlock(p).getX() == plugin.getConfig().getInt("Chest.X") && getSelectedBlock(p).getY() == plugin.getConfig().getInt("Chest.Y") && getSelectedBlock(p).getZ() == plugin.getConfig().getInt("Chest.Z")) {
-								
+
+						if (getSelectedBlock(p).getX() == plugin.getConfig()
+								.getInt("Chest.X")
+								&& getSelectedBlock(p).getY() == plugin
+										.getConfig().getInt("Chest.Y")
+								&& getSelectedBlock(p).getZ() == plugin
+										.getConfig().getInt("Chest.Z")) {
+
 							plugin.getConfig().set("Chest.X", null);
 							plugin.getConfig().set("Chest.Y", null);
 							plugin.getConfig().set("Chest.Z", null);
-								
+
 							plugin.saveConfig();
-								
+
 							p.sendMessage(prefix + "LootChest deleted.");
-							
+
 							return true;
-								
+
 						} else {
-								
-							p.sendMessage(prefix + "§cThe target block is not a LootChest.");
-								
+
+							p.sendMessage(prefix
+									+ "§cThe target block is not a LootChest.");
+
 							return true;
-							
+
 						}
 
 					} else {
 
-						p.sendMessage(prefix + "§cThe target block is not a chest");
-						
+						p.sendMessage(prefix
+								+ "§cThe target block is not a chest");
+
 						return true;
 
 					}
@@ -105,9 +125,9 @@ public class LootChestCommand implements CommandExecutor {
 
 		}
 
-	return false;
+		return false;
 
-}
+	}
 
 	@SuppressWarnings("deprecation")
 	public Block getSelectedBlock(Player p) {
