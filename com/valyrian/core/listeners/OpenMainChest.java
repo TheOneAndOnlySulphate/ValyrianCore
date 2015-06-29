@@ -4,7 +4,6 @@ import java.util.Random;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,6 +31,7 @@ public class OpenMainChest implements Listener {
 		return true;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEvent(PlayerInteractEvent e) {
 		
@@ -39,16 +39,25 @@ public class OpenMainChest implements Listener {
 			
 			Player p = e.getPlayer();
 			Inventory inv = p.getInventory();
-			ItemStack item = e.getItem();
+			ItemStack item = p.getItemInHand();
 			ItemMeta itemmeta = item.getItemMeta();
 			Block clicked = e.getClickedBlock();
 			
-			if (itemmeta.getDisplayName().equalsIgnoreCase("§a§lLootChest Key") && clicked instanceof Chest && clicked.getX() == MainClass.get().getConfig().getInt("Chest.X") && clicked.getY() == MainClass.get().getConfig().getInt("Chest.Y") && clicked.getZ() == MainClass.get().getConfig().getInt("Chest.Z")) {
+			if (itemmeta.getDisplayName().equalsIgnoreCase("§a§lLootChest Key") && clicked.getType().equals(Material.CHEST) && clicked.getX() == MainClass.get().getConfig().getInt("Chest.X") && clicked.getY() == MainClass.get().getConfig().getInt("Chest.Y") && clicked.getZ() == MainClass.get().getConfig().getInt("Chest.Z")) {
 				
+				e.setCancelled(true);
 				ItemStack diamond = new ItemStack(Material.DIAMOND, 1);
 				inv.addItem(diamond);
+				p.updateInventory();
 				
-				inv.remove(item);
+				if (p.getItemInHand().getAmount() == 1) {
+					inv.remove(item);
+				}
+				else {
+					p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+				}
+				
+				p.updateInventory();
 				
 				if (isChest()) {
 					
