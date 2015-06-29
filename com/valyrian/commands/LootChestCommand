@@ -13,6 +13,8 @@ public class LootChestCommand impements CommandExecutor {
   public boolean onCommand(CommandSender sender, Command cmd, String c, String[] args) {
     Player p = (Player) sender;
     
+    return false;
+    
   }
   
 }
