@@ -2,7 +2,7 @@ package com.valyrian.core.commands;
 
 import com.valyrian.core.main.MainClass;
 
-public class LootChestCommand impements CommandExecutor {
+public class LootChestCommand implements CommandExecutor {
 
   private main plugin;
   
