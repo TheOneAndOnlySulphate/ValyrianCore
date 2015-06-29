@@ -36,7 +36,7 @@ public class OpenMainChest implements Listener {
 	@EventHandler
 	public void onEvent(PlayerInteractEvent e) {
 		
-		if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+		if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 			
 			Player p = e.getPlayer();
 			Inventory inv = p.getInventory();
