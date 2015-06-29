@@ -1,79 +1,91 @@
 package com.valyrian.core.commands;
 
+import java.util.HashSet;
+
+import org.bukkit.block.Block;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import com.valyrian.core.main.MainClass;
 
 public class LootChestCommand implements CommandExecutor {
 
-  private main plugin;
-  
-  plugin LootChestCommand(MainClass plugin) {
-    this.plugin = plugin;
-  }
-  
-  public boolean onCommand(CommandSender sender, Command cmd, String c, String[] args) {
-    Player p = (Player) sender;
-    
-    String prefix = "§7[§bValyrian§7] §a";
-    
-    if (c.equalsIgnoreCase("lootchest")) {
-      
-      if (p.hasPermission("lootchest.admin")) {
-      
-        if (args.length == 0) {
-        
-          p.sendMessage(prefix + "Type §c/chestloot help for a list of commands");
-        
-        } else if (args.length == 1) {
-        
-          if (args[0].equalsIgnoreCase("help")) {
-          
-            p.sendMessage("/lootchest create - Sets a chest for loot");
-            p.sendMessage("/lootchest delete - Removes a chest for loot");
-          
-          } else if (args[0].equalsIgnoreCase("create")) {
-          
-            if (getSelectedBlock(p).getTypeId() == 54) {
-            
-             	plugin.getConfig().set("Chest.X", getSelectedBlock(p).getX());
-		plugin.getConfig().set("Chest.Y", getSelectedBlock(p).getY());
-		plugin.getConfig().set("Chest.Z", getSelectedBlock(p).getZ());
-							
-		plugin.saveConfig();
-              
-              p.sendMessage(prefix + "Chest for loot created.");
-            
-            } else {
-            
-              p.sendMessage(prefix + "§cThe target block is not a chest");
-            
-            }
-          
-          } else if (args[0].equalsIgnoreCase("delete")) {
-          
-            if (getSelectedBlock(p).getTypeId() == 54) {
-            
-            
-            
-            }
-          
-          }
-        
-        }
-      
-      }
-      
-    }
-    
-    return false;
-    
-  }
-  
-  public Block getSelectedBlock(Player p) {
-	
-	Block b = p.getTargetBlock((HashSet<Byte>) null, 100);
-	
-	return b;
-	
+	private MainClass plugin;
+
+	public LootChestCommand(MainClass plugin) {
+		this.plugin = plugin;
 	}
-  
+
+	public boolean onCommand(CommandSender sender, Command cmd, String c,
+			String[] args) {
+		Player p = (Player) sender;
+
+		String prefix = "§7[§bValyrian§7] §a";
+
+		if (c.equalsIgnoreCase("lootchest")) {
+
+			if (p.hasPermission("lootchest.admin")) {
+
+				if (args.length == 0) {
+
+					p.sendMessage(prefix
+							+ "Type §c/chestloot help for a list of commands");
+
+				} else if (args.length == 1) {
+
+					if (args[0].equalsIgnoreCase("help")) {
+
+						p.sendMessage("/lootchest create - Sets a chest for loot");
+						p.sendMessage("/lootchest delete - Removes a chest for loot");
+
+					} else if (args[0].equalsIgnoreCase("create")) {
+
+						if (getSelectedBlock(p).getTypeId() == 54) {
+
+							plugin.getConfig().set("Chest.X",
+									getSelectedBlock(p).getX());
+							plugin.getConfig().set("Chest.Y",
+									getSelectedBlock(p).getY());
+							plugin.getConfig().set("Chest.Z",
+									getSelectedBlock(p).getZ());
+
+							plugin.saveConfig();
+
+							p.sendMessage(prefix + "Chest for loot created.");
+
+						} else {
+
+							p.sendMessage(prefix
+									+ "§cThe target block is not a chest");
+
+						}
+
+					} else if (args[0].equalsIgnoreCase("delete")) {
+
+						if (getSelectedBlock(p).getTypeId() == 54) {
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+		return false;
+
+	}
+
+	public Block getSelectedBlock(Player p) {
+
+		Block b = p.getTargetBlock((HashSet<Byte>) null, 100);
+
+		return b;
+
+	}
+
 }
