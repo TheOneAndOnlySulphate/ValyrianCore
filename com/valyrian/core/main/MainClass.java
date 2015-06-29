@@ -2,6 +2,7 @@ package com.valyrian.core.main;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.valyrian.core.commands.LootChestCommand;
 import com.valyrian.core.utils.SendConsoleMessage;
 
 public class MainClass extends JavaPlugin {
@@ -14,13 +15,14 @@ public class MainClass extends JavaPlugin {
 		c.sendMessage(prefix + "ValyrianCore has been enabled!");
 		c.sendMessage(prefix + "The current version is: §bv1.0§a!");
 		plugin = this;
+		getCommand("lootchest").setExecutor(new LootChestCommand());
 	}
 	
 	public void onDisable() {
 		plugin = null;
 	}
 	
-	public MainClass get() {
+	public static MainClass get() {
 		return plugin;
 	}
 
