@@ -1,6 +1,7 @@
 name: ValyrianCore
 main: com.valyrian.core.main.MainClass
 version: 1.0
+authors: [Sulphate,AppleMC]
 commands:
   lootchest:
     description: Modifies the LootChest.
