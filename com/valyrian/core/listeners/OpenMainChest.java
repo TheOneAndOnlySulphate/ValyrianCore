@@ -76,7 +76,7 @@ public class OpenMainChest implements Listener {
 					}
 					
 					//Ultra Rare
-					else if (chestnumber > 0 && chestnumber <= 10) {
+					else if (chestnumber <= 10) {
 						ItemStack ultrarare = new ItemStack(Material.CHEST, 1);
 						ItemMeta urmeta = ultrarare.getItemMeta();
 						urmeta.setDisplayName("§c§l§oUltra Rare Chest§r");
@@ -88,7 +88,7 @@ public class OpenMainChest implements Listener {
 					}
 					
 					//Super Rare
-					else if (chestnumber > 10 && chestnumber <= 50) {
+					else if (chestnumber <= 50) {
 						ItemStack superrare = new ItemStack(Material.CHEST, 1);
 						ItemMeta srmeta = superrare.getItemMeta();
 						srmeta.setDisplayName("§6§lSuper Rare Chest§r");
@@ -100,10 +100,10 @@ public class OpenMainChest implements Listener {
 					}
 					
 					//Rare
-					else if (chestnumber > 50 && chestnumber <= 150) {
+					else if (chestnumber <= 150) {
 						ItemStack rare = new ItemStack(Material.CHEST, 1);
 						ItemMeta raremeta = rare.getItemMeta();
-						raremeta.setDisplayName("§eRare Chest§r")
+						raremeta.setDisplayName("§eRare Chest§r");
 						rare.setItemMeta(raremeta);
 						inv.addItem(rare);
 						p.sendMessage(prefix + "You got §eRare Chest§a! Nice!");
@@ -112,7 +112,7 @@ public class OpenMainChest implements Listener {
 					}
 					
 					//Uncommon
-					else if (chestnumber > 150 && chestnumber <= 400) {
+					else if (chestnumber <= 400) {
 						ItemStack uncommon = new ItemStack(Material.CHEST, 1);
 						ItemMeta ucmeta = uncommon.getItemMeta();
 						ucmeta.setDisplayName("§3Uncommon Chest§r");
@@ -124,10 +124,10 @@ public class OpenMainChest implements Listener {
 					}
 					
 					//Common
-					else if (chestnumber > 400 && chestnumber <= 1000) {
+					else if (chestnumber <= 1000) {
 						ItemStack common = new ItemStack(Material.CHEST, 1);
 						ItemMeta cmeta = common.getItemMeta();
-						cmeta.setDisplayName("§7Common Chest§r")
+						cmeta.setDisplayName("§7Common Chest§r");
 						common.setItemMeta(cmeta);
 						inv.addItem(common);
 						p.sendMessage(prefix + "You got §7Common Chest§a!");
