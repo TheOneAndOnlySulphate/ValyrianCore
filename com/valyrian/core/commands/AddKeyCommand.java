@@ -1,8 +1,5 @@
 package com.valyrian.core.commands;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -49,13 +46,12 @@ public class AddKeyCommand implements CommandExecutor {
 			int amount = Integer.parseInt(args[0]);
 			Inventory inv = s.getInventory();
 			
-			ItemStack key = new ItemStack(Material.TRIPWIRE_HOOK);
+			ItemStack key = new ItemStack(Material.TRIPWIRE_HOOK, amount);
 			ItemMeta keym = key.getItemMeta();
 			keym.setDisplayName("§a§lLootChest Key");
 			key.setItemMeta(keym);
-			for (int i = 0; i < amount; i++) {
-				inv.addItem(key);
-			}
+			inv.addItem(key);
+			
 			s.sendMessage(prefix + "You added §c" + amount + " §akeys!");
 			s.updateInventory();
 			return true;
