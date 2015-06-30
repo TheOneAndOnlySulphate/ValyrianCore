@@ -68,36 +68,16 @@ public class LootChestCommand implements CommandExecutor {
 					}
 
 				} else if (args[0].equalsIgnoreCase("delete")) {
-
-					if (getSelectedBlock(p).getType().equals(Material.CHEST)) {
+								
+						plugin.getConfig().set("Chest.X", null);
+						plugin.getConfig().set("Chest.Y", null);
+						plugin.getConfig().set("Chest.Z", null);
+								
+						plugin.saveConfig();
+								
+						p.sendMessage(prefix + "LootChest deleted.");
 							
-						if (getSelectedBlock(p).getX() == plugin.getConfig().getInt("Chest.X") && getSelectedBlock(p).getY() == plugin.getConfig().getInt("Chest.Y") && getSelectedBlock(p).getZ() == plugin.getConfig().getInt("Chest.Z")) {
-								
-							plugin.getConfig().set("Chest.X", null);
-							plugin.getConfig().set("Chest.Y", null);
-							plugin.getConfig().set("Chest.Z", null);
-								
-							plugin.saveConfig();
-								
-							p.sendMessage(prefix + "LootChest deleted.");
-							
-							return true;
-								
-						} else {
-								
-							p.sendMessage(prefix + "§cThe target block is not a LootChest.");
-								
-							return true;
-							
-						}
-
-					} else {
-
-						p.sendMessage(prefix + "§cThe target block is not a chest");
-						
 						return true;
-
-					}
 
 				}
 
