@@ -46,20 +46,17 @@ public class AddKeyCommand implements CommandExecutor {
 		}
 		
 		else if (args.length == 1) {
-			List<String> numbers = Arrays.asList("0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20");
-			if (!(numbers.contains(args[0]))) {
-				s.sendMessage(prefix + "§cYou can add a maximum of 20 keys. It has to be a number, not a letter or word.");
-				return true;
-			}
+			int amount = Integer.parseInt(args[0]);
 			Inventory inv = s.getInventory();
 			
 			ItemStack key = new ItemStack(Material.TRIPWIRE_HOOK);
 			ItemMeta keym = key.getItemMeta();
 			keym.setDisplayName("§a§lLootChest Key");
 			key.setItemMeta(keym);
-			for (int i = 0; i < Integer.parseInt(args[0]); i++) {
+			for (int i = 0; i < amount; i++) {
 				inv.addItem(key);
 			}
+			s.sendMessage(prefix + "You added §c" + amount + " §akeys!");
 			s.updateInventory();
 			return true;
 		}
