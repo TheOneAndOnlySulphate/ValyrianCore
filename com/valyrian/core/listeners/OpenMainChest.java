@@ -98,7 +98,11 @@ public class OpenMainChest implements Listener {
 						p.sendMessage(prefix + "You got §7Common Chest§a!");
 						return;
 					}
-				}	
+				}
+				else {
+					p.sendMessage(prefix + " Unlucky, no chest this time!");
+					return;
+				}
 			}
 		}
 	}
