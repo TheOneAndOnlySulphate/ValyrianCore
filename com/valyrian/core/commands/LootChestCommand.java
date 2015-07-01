@@ -2,6 +2,7 @@ package com.valyrian.core.commands;
 
 import java.util.HashSet;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -9,11 +10,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.valyrian.core.main.MainClass;
 
 public class LootChestCommand implements CommandExecutor {
 
 	private MainClass plugin = MainClass.get();
+	private Hologram h;
 
 	public boolean onCommand(CommandSender sender, Command cmd, String c, String[] args) {
 		Player p = (Player) sender;
@@ -48,6 +52,11 @@ public class LootChestCommand implements CommandExecutor {
 				} else if (args[0].equalsIgnoreCase("create")) {
 
 					if (getSelectedBlock(p).getType().equals(Material.CHEST)) {
+						
+						Location hloc = new Location(p.getWorld(), getSelectedBlock(p).getX(), getSelectedBlock(p).getY(), getSelectedBlock(p).getZ());
+						hloc.add(0, 1.25, 0);
+						h = HologramsAPI.createHologram(MainClass.get(), hloc);
+						h.appendTextLine("§aLootChest");
 
 						plugin.getConfig().set("Chest.X", getSelectedBlock(p).getX());
 						plugin.getConfig().set("Chest.Y", getSelectedBlock(p).getY());
@@ -68,16 +77,18 @@ public class LootChestCommand implements CommandExecutor {
 					}
 
 				} else if (args[0].equalsIgnoreCase("delete")) {
+					
+					h.delete();
 								
-						plugin.getConfig().set("Chest.X", null);
-						plugin.getConfig().set("Chest.Y", null);
-						plugin.getConfig().set("Chest.Z", null);
+					plugin.getConfig().set("Chest.X", null);
+					plugin.getConfig().set("Chest.Y", null);
+					plugin.getConfig().set("Chest.Z", null);
 								
-						plugin.saveConfig();
+					plugin.saveConfig();
 								
-						p.sendMessage(prefix + "LootChest deleted.");
+					p.sendMessage(prefix + "LootChest deleted.");
 							
-						return true;
+					return true;
 
 				}
 
