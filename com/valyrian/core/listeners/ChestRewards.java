@@ -89,6 +89,25 @@ public class ChestRewards implements Listener {
 			
 		}
 		
+		else if (item <= 20) {
+			
+			ItemStack dchest = new ItemStack(Material.DIAMOND_CHESTPLATE, 1);
+			ItemMeta dcmeta = dchest.getItemMeta();
+			dcmeta.setDisplayName("§d§kO§r§b§lLEGENDARY CHESTPLATE§d§kO§r");
+			List<String> dclore = Arrays.asList("§This chestplate was forged by the Gods", "§cthemselves. Only the chosen can", "§cever hope to wear it.");
+			dcmeta.setLore(dclore);
+			dchest.setItemMeta(dcmeta);
+			//TODO: Add Enchants
+			
+			i.addItem(dchest);
+			p.updateInventory();
+			
+			p.sendMessage("PREFIX + You recieved a §d§kO§r§b§lLEGENDARY CHESTPLATE§d§kO§r§a! Congratulations!");
+			
+			return;
+			
+		}
+		
 	}
 	
 	public void openUltraRareChest(Inventory i, Player p) {
