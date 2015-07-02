@@ -1,8 +1,12 @@
 package com.valyrian.core.listeners;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +17,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.valyrian.core.main.MainClass;
+import com.valyrian.core.utils.LootChestUtils;
 
 public class OpenMainChest implements Listener {
 	
@@ -43,9 +47,8 @@ public class OpenMainChest implements Listener {
 			ItemMeta itemmeta = item.getItemMeta();
 			Block clicked = e.getClickedBlock();
 			
-			if (itemmeta.getDisplayName().equalsIgnoreCase("§a§lLootChest Key") && clicked.getType().equals(Material.CHEST) && clicked.getX() == MainClass.get().getConfig().getInt("Chest.X") && clicked.getY() == MainClass.get().getConfig().getInt("Chest.Y") && clicked.getZ() == MainClass.get().getConfig().getInt("Chest.Z")) {
-				
-				e.setCancelled(true);
+			if (itemmeta.getDisplayName().equalsIgnoreCase("§a§lLootChest Key") && LootChestUtils.isLootChest(clicked, p)) {
+
 				ItemStack diamond = new ItemStack(Material.DIAMOND, 1);
 				inv.addItem(diamond);
 				p.updateInventory();
@@ -65,73 +68,91 @@ public class OpenMainChest implements Listener {
 					
 					//Legendary
 					if (chestnumber == 1) {
-						ItemStack legendary = new ItemStack(Material.CHEST, 1);
-						ItemMeta legmeta = legendary.getItemMeta();
-						legmeta.setDisplayName("§d§kO§r§b§lLEGENDARY CHEST§d§kO§r");
-						legendary.setItemMeta(legmeta);
-						inv.addItem(legendary);
-						p.sendMessage(prefix + "You got §d§kO§r§b§lLEGENDARY CHEST§d§kO§r§a! Congratulations!");
+						ItemStack chest = new ItemStack(Material.CHEST, 1);
+						ItemMeta meta = chest.getItemMeta();
+						meta.setDisplayName("§d§kO§r§b§lLEGENDARY CHEST§d§kO§r");
+						List<String> lore = Arrays.asList("§cRight click to open, left click to", "§csee possible rewards!");
+						meta.setLore(lore);
+						chest.setItemMeta(meta);
+						inv.addItem(chest);
 						p.updateInventory();
+						p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
+						p.sendMessage(prefix + "You got §d§kO§r§b§lLEGENDARY CHEST§d§kO§r§a! Congratulations!");
 						return;
 					}
 					
 					//Ultra Rare
-					else if (chestnumber <= 10) {
-						ItemStack ultrarare = new ItemStack(Material.CHEST, 1);
-						ItemMeta urmeta = ultrarare.getItemMeta();
-						urmeta.setDisplayName("§c§l§oUltra Rare Chest§r");
-						ultrarare.setItemMeta(urmeta);
-						inv.addItem(ultrarare);
-						p.sendMessage(prefix + "You got §c§l§oUltra Rare Chest§a! Congratulations!");
+					else if (chestnumber > 0 && chestnumber <= 10) {
+						ItemStack chest = new ItemStack(Material.CHEST, 1);
+						ItemMeta meta = chest.getItemMeta();
+						meta.setDisplayName("§c§l§oUltra Rare Chest");
+						List<String> lore = Arrays.asList("§cRight click to open, left click to", "§csee possible rewards!");
+						meta.setLore(lore);
+						chest.setItemMeta(meta);
+						inv.addItem(chest);
 						p.updateInventory();
+						p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
+						p.sendMessage(prefix + "You got §c§l§oUltra Rare Chest§a! Congratulations!");
 						return;
 					}
 					
 					//Super Rare
-					else if (chestnumber <= 50) {
-						ItemStack superrare = new ItemStack(Material.CHEST, 1);
-						ItemMeta srmeta = superrare.getItemMeta();
-						srmeta.setDisplayName("§6§lSuper Rare Chest§r");
-						superrare.setItemMeta(srmeta);
-						inv.addItem(superrare);
-						p.sendMessage(prefix + "You got §6§lSuper Rare Chest§a! Well Done!");
+					else if (chestnumber > 10 && chestnumber <= 50) {
+						ItemStack chest = new ItemStack(Material.CHEST, 1);
+						ItemMeta meta = chest.getItemMeta();
+						meta.setDisplayName("§6§lSuper Rare Chest§r");
+						List<String> lore = Arrays.asList("§cRight click to open, left click to", "§csee possible rewards!");
+						meta.setLore(lore);
+						chest.setItemMeta(meta);
+						inv.addItem(chest);
 						p.updateInventory();
+						p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
+						p.sendMessage(prefix + "You got §6§lSuper Rare Chest§a! Well Done!");
 						return;
 					}
 					
 					//Rare
-					else if (chestnumber <= 150) {
-						ItemStack rare = new ItemStack(Material.CHEST, 1);
-						ItemMeta raremeta = rare.getItemMeta();
-						raremeta.setDisplayName("§eRare Chest§r");
-						rare.setItemMeta(raremeta);
-						inv.addItem(rare);
-						p.sendMessage(prefix + "You got §eRare Chest§a! Nice!");
+					else if (chestnumber > 50 && chestnumber <= 150) {
+						ItemStack chest = new ItemStack(Material.CHEST, 1);
+						ItemMeta meta = chest.getItemMeta();
+						meta.setDisplayName("§eRare Chest§r");
+						List<String> lore = Arrays.asList("§cRight click to open, left click to", "§csee possible rewards!");
+						meta.setLore(lore);
+						chest.setItemMeta(meta);
+						inv.addItem(chest);
 						p.updateInventory();
+						p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
+						p.sendMessage(prefix + "You got §eRare Chest§a! Nice!");
 						return;
 					}
 					
 					//Uncommon
-					else if (chestnumber <= 400) {
-						ItemStack uncommon = new ItemStack(Material.CHEST, 1);
-						ItemMeta ucmeta = uncommon.getItemMeta();
-						ucmeta.setDisplayName("§3Uncommon Chest§r");
-						uncommon.setItemMeta(ucmeta);
-						inv.addItem(uncommon);
-						p.sendMessage(prefix + "You got §3Uncommon Chest§a!");
+					else if (chestnumber > 150 && chestnumber <= 400) {
+						ItemStack chest = new ItemStack(Material.CHEST, 1);
+						ItemMeta meta = chest.getItemMeta();
+						meta.setDisplayName("§3Uncommon Chest§r");
+						List<String> lore = Arrays.asList("§cRight click to open, left click to", "§csee possible rewards!");
+						meta.setLore(lore);
+						chest.setItemMeta(meta);
+						inv.addItem(chest);
 						p.updateInventory();
+						p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
+						p.sendMessage(prefix + "You got §3Uncommon Chest§a!");
 						return;
 					}
 					
 					//Common
-					else if (chestnumber <= 1000) {
-						ItemStack common = new ItemStack(Material.CHEST, 1);
-						ItemMeta cmeta = common.getItemMeta();
-						cmeta.setDisplayName("§7Common Chest§r");
-						common.setItemMeta(cmeta);
-						inv.addItem(common);
-						p.sendMessage(prefix + "You got §7Common Chest§a!");
+					else if (chestnumber > 400 && chestnumber <= 1000) {
+						ItemStack chest = new ItemStack(Material.CHEST, 1);
+						ItemMeta meta = chest.getItemMeta();
+						meta.setDisplayName("§7Common Chest§r");
+						List<String> lore = Arrays.asList("§cRight click to open, left click to", "§csee possible rewards!");
+						meta.setLore(lore);
+						chest.setItemMeta(meta);
+						inv.addItem(chest);
 						p.updateInventory();
+						p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
+						p.sendMessage(prefix + "You got §7Common Chest§a!");
 						return;
 					}
 				}
@@ -140,6 +161,83 @@ public class OpenMainChest implements Listener {
 					return;
 				}
 			}
+			else if (LootChestUtils.isLootChest(clicked, p)) {
+				p.sendMessage(prefix + "§cYou do not have a §aLootChest Key§c!");
+				e.setCancelled(true);
+				return;
+			}
+		}
+		else if (e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+			
+			Player p = e.getPlayer();
+			Block clicked = e.getClickedBlock();
+			
+			if (LootChestUtils.isLootChest(clicked, p)) {
+				
+				e.setCancelled(true);
+				
+				Inventory rewards = Bukkit.createInventory(p, 27, "Possible Rewards:");
+				
+				ItemStack diam = new ItemStack(Material.DIAMOND, 1);
+				ItemStack legchest = new ItemStack(Material.CHEST, 1);
+				ItemStack urchest = new ItemStack(Material.CHEST, 1);
+				ItemStack srchest = new ItemStack(Material.CHEST, 1);
+				ItemStack rchest = new ItemStack(Material.CHEST, 1);
+				ItemStack ucchest = new ItemStack(Material.CHEST, 1);
+				ItemStack cchest = new ItemStack(Material.CHEST, 1);
+				
+				ItemMeta dmeta = diam.getItemMeta();
+				ItemMeta legmeta = legchest.getItemMeta();
+				ItemMeta urmeta = urchest.getItemMeta();
+				ItemMeta srmeta = srchest.getItemMeta();
+				ItemMeta rmeta = rchest.getItemMeta();
+				ItemMeta ucmeta = ucchest.getItemMeta();
+				ItemMeta cmeta = cchest.getItemMeta();
+				
+				dmeta.setDisplayName("§b§lDiamond");
+				legmeta.setDisplayName("§d§kO§r§b§lLEGENDARY CHEST§d§kO§r");
+				urmeta.setDisplayName("§c§l§oUltra Rare Chest§r");
+				srmeta.setDisplayName("§6§lSuper Rare Chest§r");
+				rmeta.setDisplayName("§eRare Chest§r");
+				ucmeta.setDisplayName("§3Uncommon Chest§r");
+				cmeta.setDisplayName("§7Common Chest§r");
+				
+				List<String> diamlore = Arrays.asList("§c§l100% Chance");
+				List<String> leglore = Arrays.asList("§c§l0.1% Chance");
+				List<String> urlore = Arrays.asList("§c§l0.9% Chance");
+				List<String> srlore = Arrays.asList("§c§l4% Chance");
+				List<String> rlore = Arrays.asList("§c§l10% Chance");
+				List<String> uclore = Arrays.asList("§c§l25% Chance");
+				List<String> clore = Arrays.asList("§c§l60% Chance");
+				
+				dmeta.setLore(diamlore);
+				legmeta.setLore(leglore);
+				urmeta.setLore(urlore);
+				srmeta.setLore(srlore);
+				rmeta.setLore(rlore);
+				ucmeta.setLore(uclore);
+				cmeta.setLore(clore);
+				
+				diam.setItemMeta(dmeta);
+				legchest.setItemMeta(legmeta);
+				urchest.setItemMeta(urmeta);
+				srchest.setItemMeta(srmeta);
+				rchest.setItemMeta(rmeta);
+				ucchest.setItemMeta(ucmeta);
+				cchest.setItemMeta(cmeta);
+				
+				rewards.addItem(diam);
+				rewards.addItem(legchest);
+				rewards.addItem(urchest);
+				rewards.addItem(srchest);
+				rewards.addItem(rchest);
+				rewards.addItem(ucchest);
+				rewards.addItem(cchest);
+				
+				p.openInventory(rewards);
+				
+			}
+			
 		}
 	}
 }
