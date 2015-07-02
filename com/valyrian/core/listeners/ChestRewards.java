@@ -63,6 +63,32 @@ public class ChestRewards implements Listener {
 	
 	public void openLegendaryChest(Inventory i, Player p) {
 		
+		int item = r.nextInt(1000) + 1;
+		
+		if (item <= 10) {
+			
+			ItemStack dhelm = new ItemStack(Material.DIAMOND_HELMET, 1);
+			ItemMeta dhmeta = dhelm.getItemMeta();
+			dhmeta.setDisplayName("§d§kO§r§b§lLEGENDARY HELMET§d§kO§r");
+			List<String> dhlore = Arrays.asList("§cThis is the helmet of the Gods. Only", "a few have ever worn it.");
+			dhmeta.setLore(dhlore);
+			dhelm.setItemMeta(dhmeta);
+			dhelm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+			dhelm.addEnchantment(Enchantment.PROTECTION_FIRE, 3);
+			dhelm.addEnchantment(Enchantment.PROTECION_EXPLOSIONS, 3);
+			dhelm.addEnchantment(Enchantment.PROTECTION_PROJECTILES, 3);
+			dhelm.addEnchantment(Enchantment.THORNS, 2);
+			dhelm.addEnchantment(Enchantment.WATER_WORKER, 2);
+			
+			i.addItem(dhelm);
+			p.updateInventory();
+			
+			p.sendMessage("PREFIX + You recieved a §d§kO§r§b§lLEGENDARY HELMET§d§kO§r§a! Congratulations!")
+			
+			return;
+			
+		}
+		
 	}
 	
 	public void openUltraRareChest(Inventory i, Player p) {
