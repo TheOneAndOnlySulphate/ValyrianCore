@@ -2,7 +2,6 @@ package com.valyrian.core.commands;
 
 import java.util.HashSet;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -11,8 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import com.valyrian.core.main.MainClass;
+import com.valyrian.core.utils.LootChestUtils;
 
 public class LootChestCommand implements CommandExecutor {
 
@@ -52,17 +51,10 @@ public class LootChestCommand implements CommandExecutor {
 				} else if (args[0].equalsIgnoreCase("create")) {
 
 					if (getSelectedBlock(p).getType().equals(Material.CHEST)) {
+
+						LootChestUtils.createLootChest(getSelectedBlock(p).getLocation());
 						
-						Location hloc = new Location(p.getWorld(), getSelectedBlock(p).getX(), getSelectedBlock(p).getY(), getSelectedBlock(p).getZ());
-						hloc.add(0, 1.25, 0);
-						h = HologramsAPI.createHologram(MainClass.get(), hloc);
-						h.appendTextLine("§aLootChest");
-
-						plugin.getConfig().set("Chest.X", getSelectedBlock(p).getX());
-						plugin.getConfig().set("Chest.Y", getSelectedBlock(p).getY());
-						plugin.getConfig().set("Chest.Z", getSelectedBlock(p).getZ());
-
-						plugin.saveConfig();
+						h = LootChestUtils.createChestHologram(p);
 
 						p.sendMessage(prefix + "LootChest created.");
 						
