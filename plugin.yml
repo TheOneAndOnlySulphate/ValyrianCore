@@ -1,6 +1,7 @@
 name: ValyrianCore
 main: com.valyrian.core.main.MainClass
 version: 1.0
+softdepend: [HolographicDisplays]
 authors: [Sulphate,AppleMC]
 commands:
   lootchest:
