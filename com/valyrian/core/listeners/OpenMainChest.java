@@ -17,7 +17,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.valyrian.core.utils.LootChestUtils;
+import com.valyrian.core.main.MainClass;
 
 public class OpenMainChest implements Listener {
 	
@@ -47,8 +47,18 @@ public class OpenMainChest implements Listener {
 			ItemMeta itemmeta = item.getItemMeta();
 			Block clicked = e.getClickedBlock();
 			
-			if (itemmeta.getDisplayName().equalsIgnoreCase("§a§lLootChest Key") && LootChestUtils.isLootChest(clicked, p)) {
+			if (!(itemmeta.getDisplayName().equalsIgnoreCase("§a§lLootChest Key") && MainClass.getLCU().isLootChest(clicked))) {
+				
+				p.sendMessage(prefix + "§cYou do not have a §a§lLootChest Key§c.");
+				e.setCancelled(true);
+				return;
+				
+			}
+			
+			if (itemmeta.getDisplayName().equalsIgnoreCase("§a§lLootChest Key") && MainClass.getLCU().isLootChest(clicked)) {
 
+				e.setCancelled(true);
+				
 				ItemStack diamond = new ItemStack(Material.DIAMOND, 1);
 				inv.addItem(diamond);
 				p.updateInventory();
@@ -161,18 +171,13 @@ public class OpenMainChest implements Listener {
 					return;
 				}
 			}
-			else if (LootChestUtils.isLootChest(clicked, p)) {
-				p.sendMessage(prefix + "§cYou do not have a §aLootChest Key§c!");
-				e.setCancelled(true);
-				return;
-			}
 		}
 		else if (e.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
 			
 			Player p = e.getPlayer();
 			Block clicked = e.getClickedBlock();
 			
-			if (LootChestUtils.isLootChest(clicked, p)) {
+			if (MainClass.getLCU().isLootChest(clicked)) {
 				
 				e.setCancelled(true);
 				
