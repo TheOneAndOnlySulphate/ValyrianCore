@@ -9,14 +9,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.valyrian.core.main.MainClass;
-import com.valyrian.core.utils.LootChestUtils;
 
 public class LootChestCommand implements CommandExecutor {
-
-	private MainClass plugin = MainClass.get();
-	private Hologram h;
 
 	public boolean onCommand(CommandSender sender, Command cmd, String c, String[] args) {
 		Player p = (Player) sender;
@@ -52,9 +47,7 @@ public class LootChestCommand implements CommandExecutor {
 
 					if (getSelectedBlock(p).getType().equals(Material.CHEST)) {
 
-						LootChestUtils.createLootChest(getSelectedBlock(p).getLocation());
-						
-						h = LootChestUtils.createChestHologram(p);
+						MainClass.getLCU().createLootChest(getSelectedBlock(p).getLocation());
 
 						p.sendMessage(prefix + "LootChest created.");
 						
@@ -70,14 +63,8 @@ public class LootChestCommand implements CommandExecutor {
 
 				} else if (args[0].equalsIgnoreCase("delete")) {
 					
-					h.delete();
-								
-					plugin.getConfig().set("Chest.X", null);
-					plugin.getConfig().set("Chest.Y", null);
-					plugin.getConfig().set("Chest.Z", null);
-								
-					plugin.saveConfig();
-								
+					MainClass.getLCU().deleteLootChest();
+					
 					p.sendMessage(prefix + "LootChest deleted.");
 							
 					return true;
@@ -100,5 +87,5 @@ public class LootChestCommand implements CommandExecutor {
 		return b;
 
 	}
-
+	
 }
