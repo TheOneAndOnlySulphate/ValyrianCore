@@ -114,11 +114,12 @@ public class ChestRewards implements Listener {
 			List<String> dhlore = Arrays.asList("§cThis helmet was forged by the Gods", "§cthemselves. Only the chosen can", "§cever hope to wear it");
 			dhmeta.setLore(dhlore);
 			dhelm.setItemMeta(dhmeta);
-			dhelm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
-			dhelm.addEnchantment(Enchantment.PROTECTION_FIRE, 3);
-			dhelm.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 3);
-			dhelm.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
-			dhelm.addEnchantment(Enchantment.WATER_WORKER, 2);
+			dhelm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 8);
+			dhelm.addEnchantment(Enchantment.PROTECTION_FIRE, 8);
+			dhelm.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 8);
+			dhelm.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 8);
+			dhelm.addEnchantment(Enchantment.WATER_WORKER, 6);
+			dhelm.addEnchantment(Enchantment.OXYGEN, 6);
 			
 			i.addItem(dhelm);
 			p.updateInventory();
@@ -137,11 +138,11 @@ public class ChestRewards implements Listener {
 			List<String> dclore = Arrays.asList("§cThis chestplate was forged by the Gods", "§cthemselves. Only the chosen can", "§cever hope to wear it.");
 			dcmeta.setLore(dclore);
 			dchest.setItemMeta(dcmeta);
-			dchest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
-			dchest.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 3);
-			dchest.addEnchantment(Enchantment.PROTECTION_FIRE, 3);
-			dchest.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
-			dchest.addEnchantment(Enchantment.THORNS, 2);
+			dchest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 8);
+			dchest.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 8);
+			dchest.addEnchantment(Enchantment.PROTECTION_FIRE, 8);
+			dchest.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 8);
+			dchest.addEnchantment(Enchantment.THORNS, 6);
 			
 			i.addItem(dchest);
 			p.updateInventory();
@@ -161,16 +162,60 @@ public class ChestRewards implements Listener {
 			List<String> dllore = Arrays.asList("§cThese leggings were forged by the Gods", "§cthemselves. Only the chosen can ever", "§chope to wear them.");
 			dlmeta.setLore(dllore);
 			dlegs.setItemMeta(dlmeta);
-			dlegs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
-			dlegs.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 3);
-			dlegs.addEnchantment(Enchantment.PROTECTION_FIRE, 3);
-			dlegs.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
-			dlegs.addEnchantment(Enchantment.THORNS, 2);
+			dlegs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 8);
+			dlegs.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 8);
+			dlegs.addEnchantment(Enchantment.PROTECTION_FIRE, 8);
+			dlegs.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 8);
+			dlegs.addEnchantment(Enchantment.THORNS, 6);
 			
 			i.addItem(dlegs);
 			p.updateInventory();
 			
 			p.sendMessage(prefix + "You recieved " + itemname + "§a! Congratulations!");
+			
+			return;
+			
+		}
+		
+		else if (item <= 40) { //Diamond Boots
+			
+			String itemname = "§d§kO§b§lLEGENDARY BOOTS§d§kO§r";
+			ItemStack dboots = new ItemStack(Material.DIAMOND_BOOTS, 1);
+			ItemMeta dbmeta = dboots.getItemMeta();
+			dbmeta.setDisplayName(itemname);
+			List<String> dblore = Arrays.asList("§cThese boots were forged by the Gods", "§cthemselves. Only the chosen can ever", "§chope to wear them.");
+			dbmeta.setLore(dblore);
+			dboots.setItemMeta(dbmeta);
+			dboots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 8);
+			dboots.addEnchantment(Enchantment.PROTECTION_EXPLOSIONS, 8);
+			dboots.addEnchantment(Enchantment.PROTECTION_FIRE, 8);
+			dboots.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 8);
+			dboots.addEnchantment(Enchantment.PROTECTION_FALL, 6);
+			dboots.addEnchantment(Enchantment.DEPTH_STRIDER, 6);
+			
+			i.addItem(dboots);
+			p.updateInventory();
+			
+			return;
+			
+		}
+		
+		else if (item <= 50) { //Diamond Pickaxe
+		
+			String itemname = "§d§kO§b§lLEGENDARY PICKAXE§d§kO§r";
+			ItemStack dpick = new ItemStack(Material.DIAMOND_PICKAXE, 1);
+			ItemMeta dpmeta = dpick.getItemMeta();
+			dpmeta.setDisplayName(itemname);
+			List<String> dplore = Arrays.asList("§cThis pickaxe was forged by the Gods", "§cthemselves. Only the chosen can ever", "§chope to use it.");
+			dpmeta.setLore(dplore);
+			dpick.setItemMeta(dpmeta);
+			dpick.addEnchantment(Enchantment.DIG_SPEED, 5);
+			dpick.addEnchantment(Enchantment.DURABILITY, 5);
+			dpick.addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, 5)
+			dpick.addEnchantment(Enchantment.DAMAGE_ALL, 3);
+			
+			i.addItem(dpick);
+			p.updateInventory();
 			
 			return;
 			
