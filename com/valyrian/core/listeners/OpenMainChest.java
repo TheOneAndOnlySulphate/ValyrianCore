@@ -47,7 +47,7 @@ public class OpenMainChest implements Listener {
 			ItemMeta itemmeta = item.getItemMeta();
 			Block clicked = e.getClickedBlock();
 			
-			if (!(itemmeta.getDisplayName().equalsIgnoreCase("§a§lLootChest Key") && MainClass.getLCU().isLootChest(clicked))) {
+			if (itemmeta.getDisplayName().equalsIgnoreCase("§a§lLootChest Key") && MainClass.getLCU().isLootChest(clicked)) {
 				
 				p.sendMessage(prefix + "§cYou do not have a §a§lLootChest Key§c.");
 				e.setCancelled(true);
