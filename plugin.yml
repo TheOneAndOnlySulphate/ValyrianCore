@@ -2,9 +2,10 @@ name: ValyrianCore
 main: com.valyrian.core.main.MainClass
 version: 1.0
 softdepend: [HolographicDisplays]
-authors: [Sulphate,AppleMC]
 commands:
   lootchest:
     description: Modifies the LootChest.
   addkey:
-    description: Adds a key to open the LootChest.
+    description: Adds a key/s to open the LootChest.
+  addchest:
+    description: Adds a chest.
