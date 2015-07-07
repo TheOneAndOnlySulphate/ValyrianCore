@@ -39,7 +39,7 @@ public class MainClass extends JavaPlugin {
 		getCommand("addchest").setExecutor(new AddChestCommand());
 		getCommand("gamemode").setExecutor(new SetGamemodeCommand());
 		getCommand("gm").setExecutor(new SetGamemodeCommand());
-		//Added "gamemode" "gm"
+		getCommand("fly").setExecutor(new FlyCommand());
 		
 	}
 	
