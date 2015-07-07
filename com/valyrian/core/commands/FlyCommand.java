@@ -13,7 +13,7 @@ public class FlyCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = (Player) sender;
 		
-		if (p.hasPermission("vc.fly")) {
+		if (p.hasPermission("vc.fly") || p.isOp()) {
 			//opxe = Other Prefix Enabled
 			final String opxe = ChatColor.GREEN + "Fly mode enabled "; 
 			final String opxd = ChatColor.RED + "Fly mode disabled "; 
@@ -25,7 +25,7 @@ public class FlyCommand implements CommandExecutor {
 			// /fly disable vc.fly
 			// /fly enable <player> vc.fly.others
 			// /fly disable <player> vc.fly.others
-			if(p.hasPermission("vc.fly.others") && args.length == 2) {
+			if((p.hasPermission("vc.fly.others") || p.isOp()) && args.length == 2) {
 				
 				if (args[0].equals("enable")) {
 					
