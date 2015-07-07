@@ -37,6 +37,9 @@ public class MainClass extends JavaPlugin {
 		getCommand("lootchest").setExecutor(new LootChestCommand());
 		getCommand("addkey").setExecutor(new AddKeyCommand());
 		getCommand("addchest").setExecutor(new AddChestCommand());
+		getCommand("gamemode").setExecutor(new SetGamemodeCommand());
+		getCommand("gm").setExecutor(new SetGamemodeCommand());
+		//Added "gamemode" "gm"
 		
 	}
 	
