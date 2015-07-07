@@ -13,6 +13,9 @@ public class SetGamemodeCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		Player p = (Player) sender;
+		if (args.length == 0) {
+			return false;
+		}
 		if ((p.hasPermission("vc.gamemode") || p.isOp())) {
 			/*
 			 * \  /gm <gamemode> <player>
