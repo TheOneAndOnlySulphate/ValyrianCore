@@ -24,7 +24,7 @@ public class HealCommand implements CommandExecutor {
 			p.sendMessage(msg);
 		} else if (args.length == 1) {
 			if (p.hasPermission("vc.heal.others")) {
-				if (args[0].equals("all")) {
+				if (args[0].equals("all") && (Bukkit.getPlayer(args[0]) == null)) {
 					for (Player player : Bukkit.getOnlinePlayers()) {
 						player.setHealth(player.getMaxHealth());
 						player.sendMessage(allheal + " " + msg);
