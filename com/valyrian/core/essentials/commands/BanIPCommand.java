@@ -39,7 +39,7 @@ public class BanIPCommand implements CommandExecutor {
 					
 					target.setBanned(true);
 					
-					target.kickPlayer("You have been IP banned.");
+					target.kickPlayer("§cYou have been IP banned.");
 					
 					Bukkit.broadcastMessage(prefix + "§b" + target.getDisplayName() + "§a has been IP banned.");
 					
