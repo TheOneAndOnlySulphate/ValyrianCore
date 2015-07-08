@@ -52,6 +52,8 @@ public class MainClass extends JavaPlugin {
 		getCommand("kick").setExecutor(new KickCommand());
 		getCommand("heal").setExecutor(new HealCommand());
 		getCommand("workbench").setExecutor(new WorkbenchCommand());
+		getCommand("clearinventory").setExecutor(new ClearInventoryCommand());
+		getCommand("ci").setExecutor(new ClearInventoryCommand());
 		
 	}
 	
