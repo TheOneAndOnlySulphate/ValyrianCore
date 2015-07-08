@@ -17,7 +17,7 @@ public class FlyCommand implements CommandExecutor {
 		
 		if (!p.hasPermission("vc.fly")) {
 			
-			p.sendMessage(prefix + "§You do not have permissions to do this!");
+			p.sendMessage("§4You do not have permissions to do this!");
 			
 			return true;
 			
@@ -63,54 +63,74 @@ public class FlyCommand implements CommandExecutor {
 					
 				} else {
 					
-					Player target = (Player) Bukkit.getPlayer(args[0]);
-					
-					if (target.getAllowFlight()) {
+					if (!p.hasPermission("vc.fly.others")) {
 						
-						target.setAllowFlight(!target.getAllowFlight());
-						
-						p.sendMessage(prefix + "You have disabled flight for §b" + target.getDisplayName() + "§a.");
+						p.sendMessage("§4You do not have permissions to do this!");
 						
 						return true;
 						
 					} else {
+					
+						Player target = (Player) Bukkit.getPlayer(args[0]);
 						
-						target.setAllowFlight(!target.getAllowFlight());
-						
-						p.sendMessage(prefix + "You have enabled flight for §b" + target.getDisplayName() + "§a.");
-						
-						return true;
-						
+						if (target.getAllowFlight()) {
+							
+							target.setAllowFlight(!target.getAllowFlight());
+							
+							p.sendMessage(prefix + "You have disabled flight for §b" + target.getDisplayName() + "§a.");
+							
+							return true;
+							
+						} else {
+							
+							target.setAllowFlight(!target.getAllowFlight());
+							
+							p.sendMessage(prefix + "You have enabled flight for §b" + target.getDisplayName() + "§a.");
+							
+							return true;
+							
+						}
+					
 					}
 					
 				}
 				
 			} else if (args.length == 2) {
 				
-				if (args[0].equalsIgnoreCase("?")) {
+				if (!p.hasPermission("vc.fly.others")) {
 					
-					Player target = (Player) Bukkit.getPlayer(args[1]);
+					p.sendMessage("§4You do not have permissions to do this!");
 					
-					if (target.getAllowFlight()) {
+					return true;
 					
-						p.sendMessage(prefix + "§b" + target.getDisplayName() + "'s §aflight mode is enabled.");
+				} else {
+				
+					if (args[0].equalsIgnoreCase("?")) {
 						
-						return true;
+						Player target = (Player) Bukkit.getPlayer(args[1]);
+						
+						if (target.getAllowFlight()) {
+						
+							p.sendMessage(prefix + "§b" + target.getDisplayName() + "'s §aflight mode is enabled.");
+							
+							return true;
+							
+						} else {
+							
+							p.sendMessage(prefix + "§b" + target.getDisplayName() + "'s §aflight mode is disabled.");
+							
+							return true;
+							
+						}
 						
 					} else {
 						
-						p.sendMessage(prefix + "§b" + target.getDisplayName() + "'s §aflight mode is disabled.");
+						p.sendMessage(prefix + "§Please use /fly ? <targetPlayer>");
 						
 						return true;
 						
 					}
-					
-				} else {
-					
-					p.sendMessage(prefix + "§Please use /fly ? <targetPlayer>");
-					
-					return true;
-					
+				
 				}
 				
 			}
