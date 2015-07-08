@@ -34,6 +34,12 @@ public class HealCommand implements CommandExecutor {
 			} else if (args.length == 1) {
 				
 				if (!p.hasPermission("vc.heal.others")) {
+
+p.sendMessage(prefix + "You do not have permissions to do this!");
+
+return true
+
+} else {
 					
 					if (args[0].equalsIgnoreCase("all")) {
 						
