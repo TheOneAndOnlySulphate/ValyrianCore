@@ -54,6 +54,9 @@ public class MainClass extends JavaPlugin {
 		getCommand("workbench").setExecutor(new WorkbenchCommand());
 		getCommand("clearinventory").setExecutor(new ClearInventoryCommand());
 		getCommand("banip").setExecutor(new BanIPCommand());
+		getCommand("chest").setExecutor(new EnderChestCommand());
+		getCommand("time").setExecutor(new TimeCommand());
+		getCommand("weather").setExecutor(new WeatherCommand());
 		
 	}
 	
