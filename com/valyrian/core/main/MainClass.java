@@ -1,13 +1,10 @@
 package com.valyrian.core.main;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import com.valyrian.core.essentials.commands.BanCommand;
-import com.valyrian.core.essentials.commands.FlyCommand;
-import com.valyrian.core.essentials.commands.KickCommand;
-import com.valyrian.core.essentials.commands.SetGamemodeCommand;
 import com.valyrian.core.lootchest.commands.AddChestCommand;
 import com.valyrian.core.lootchest.commands.AddKeyCommand;
 import com.valyrian.core.lootchest.commands.LootChestCommand;
@@ -26,35 +23,25 @@ public class MainClass extends JavaPlugin {
 	
 	public void onEnable() {
 		c.sendMessage(prefix + "ValyrianCore has been enabled!");
-		c.sendMessage(prefix + "The current version is: §bv1.3.3§a!");
+		c.sendMessage(prefix + "The current version is: §bv1.3.8§a!");
 		plugin = this;
 	
 		if (getConfig().getBoolean("Chest.Enabled")) {
 			
-			l.createChestHologram();
+			Location lootchest = l.getLootChestLocation();
+			
+			l.deleteLootChest();
+			
+			l.createLootChest(lootchest);
 			
 		}
 		
 		Bukkit.getPluginManager().registerEvents(new OpenMainChest(), this);
 		Bukkit.getPluginManager().registerEvents(new ChestRewards(), this);
 		Bukkit.getPluginManager().registerEvents(new InvClickEventCanceller(), this);
-		
-		// LootChest Commands
 		getCommand("lootchest").setExecutor(new LootChestCommand());
 		getCommand("addkey").setExecutor(new AddKeyCommand());
 		getCommand("addchest").setExecutor(new AddChestCommand());
-		
-		// Essentials Commands
-		getCommand("gamemode").setExecutor(new SetGamemodeCommand());
-		getCommand("gm").setExecutor(new SetGamemodeCommand());
-		getCommand("fly").setExecutor(new FlyCommand());
-		getCommand("ban").setExecutor(new BanCommand());
-		getCommand("kick").setExecutor(new KickCommand());
-		getCommand("heal").setExecutor(new HealCommand());
-		getCommand("workbench").setExecutor(new WorkbenchCommand());
-		getCommand("clearinventory").setExecutor(new ClearInventoryCommand());
-		getCommand("ci").setExecutor(new ClearInventoryCommand());
-		getCommand("banip").setExecutor(new BanIPCommand());
 		
 	}
 	
