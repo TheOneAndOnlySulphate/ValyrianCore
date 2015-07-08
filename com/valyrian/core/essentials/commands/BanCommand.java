@@ -25,7 +25,7 @@ public class BanCommand implements CommandExecutor {
 			
 			if (args.length == 0) {
 				
-				p.sendMessage(prefix + "§cPlease use /ban <player> (<reason>)");
+				p.sendMessage(prefix + "§cPlease use /ban <player> [reason]");
 				
 				return true;
 				
@@ -39,9 +39,9 @@ public class BanCommand implements CommandExecutor {
 						
 						target.setBanned(true);
 						
-						target.kickPlayer("The Ban Hammer has spoken!");
+						target.kickPlayer("§cYou have been banned by a staff member.");
 						
-						Bukkit.broadcastMessage(prefix + "§b" + target.getDisplayName() + " §ahas been banned for: The Ban Hammer has spoken.");
+						Bukkit.broadcastMessage(prefix + "§b" + target.getDisplayName() + " §ahas been banned for: §cYou have .");
 						
 						return true;
 						
