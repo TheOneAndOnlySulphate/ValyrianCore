@@ -35,12 +35,12 @@ public class HealCommand implements CommandExecutor {
 				
 				if (!p.hasPermission("vc.heal.others")) {
 
-p.sendMessage(prefix + "You do not have permissions to do this!");
+				p.sendMessage(prefix + "You do not have permissions to do this!");
 
-return true
+				return true;
 
-} else {
-					
+				} else {
+						
 					if (args[0].equalsIgnoreCase("all")) {
 						
 						for (Player player : Bukkit.getOnlinePlayers()) {
@@ -62,20 +62,19 @@ return true
 							target.setHealth(target.getMaxHealth());
 							
 							target.sendMessage(prefix + "You have been healed by §b" + p.getDisplayName() + "§a.");
-							
+						
 							p.sendMessage(prefix + "You have healed §b" + target.getDisplayName() + "§a.");
-							
+						
 						}
 						
 					}
 					
 				}
-				
-			}
 			
+			}
+		
 		}
 		
 		return true;
 	}
-
 }
