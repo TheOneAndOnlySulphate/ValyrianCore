@@ -19,7 +19,7 @@ public class KickCommand implements CommandExecutor {
 		// /kick <player> [reason]
 		Player target = Bukkit.getPlayer(args[0]);
 		//You can remove override if you don't want it, I just thought it would be a good idea
-		if (target.hasPermission("vc.kick.ignore") && (!p.hasPermission("vc.kick.override"))) {
+		if (target.hasPermission("vc.kick.exempt") && (!p.hasPermission("vc.kick.override"))) {
 			p.sendMessage(ChatColor.DARK_RED + "You cannot kick this person.");
 			return true;
 		}
