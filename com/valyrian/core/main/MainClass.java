@@ -5,6 +5,15 @@ import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import com.valyrian.core.essentials.commands.BanCommand;
+import com.valyrian.core.essentials.commands.BanIPCommand;
+import com.valyrian.core.essentials.commands.ClearInventoryCommand;
+import com.valyrian.core.essentials.commands.EnderChestCommand;
+import com.valyrian.core.essentials.commands.FlyCommand;
+import com.valyrian.core.essentials.commands.HealCommand;
+import com.valyrian.core.essentials.commands.KickCommand;
+import com.valyrian.core.essentials.commands.SetGamemodeCommand;
+import com.valyrian.core.essentials.commands.WorkbenchCommand;
 import com.valyrian.core.lootchest.commands.AddChestCommand;
 import com.valyrian.core.lootchest.commands.AddKeyCommand;
 import com.valyrian.core.lootchest.commands.LootChestCommand;
