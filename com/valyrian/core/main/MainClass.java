@@ -43,6 +43,19 @@ public class MainClass extends JavaPlugin {
 		getCommand("addkey").setExecutor(new AddKeyCommand());
 		getCommand("addchest").setExecutor(new AddChestCommand());
 		
+		// Essentials Commands
+		getCommand("gamemode").setExecutor(new SetGamemodeCommand());
+		getCommand("gm").setExecutor(new SetGamemodeCommand());
+		getCommand("fly").setExecutor(new FlyCommand());
+		getCommand("ban").setExecutor(new BanCommand());
+		getCommand("kick").setExecutor(new KickCommand());
+		getCommand("heal").setExecutor(new HealCommand());
+		getCommand("workbench").setExecutor(new WorkbenchCommand());
+		getCommand("clearinventory").setExecutor(new ClearInventoryCommand());
+		getCommand("ci").setExecutor(new ClearInventoryCommand());
+		getCommand("banip").setExecutor(new BanIPCommand());
+		getCommand("chest").setExecutor(new EnderChestCommand());
+		
 	}
 	
 	public void onDisable() {
