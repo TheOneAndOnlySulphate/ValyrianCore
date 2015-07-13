@@ -1,7 +1,8 @@
 name: ValyrianCore
 main: com.valyrian.core.main.MainClass
-version: 1.0
+version: 1.4.0
 softdepend: [HolographicDisplays]
+depend: [Votifier]
 commands:
   lootchest:
     description: Modifies the LootChest.
@@ -9,3 +10,27 @@ commands:
     description: Adds a key/s to open the LootChest.
   addchest:
     description: Adds a chest.
+  fly:
+    description: Toggles flying for you / a player.
+  gamemode:
+    description: Changes a player's gamemode.
+  heal:
+    description: Heals you / a player.
+  kick:
+    description: Kicks a player. Can be overrided.
+  ban:
+    description: Bans a player. Can be overrided.
+  banip:
+    description: IP Bans a player. Can be overrided.
+  workbench
+    description: Opens a workbench.
+  chest:
+    description: Gets yours / a player's ender chest.
+  clearinventory:
+    description: Clears yours / a player's inventory.
+  time:
+    description: Changes the world time.
+  weather:
+    description: Changes the world weather.
+  invsee:
+    description: Lets you see a player's inventory. Can edit with perms.
