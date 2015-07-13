@@ -9,6 +9,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.valyrian.core.main.MainClass;
+
 public class AddKeyCommand implements CommandExecutor {
 
 	@SuppressWarnings("deprecation")
@@ -61,5 +63,39 @@ public class AddKeyCommand implements CommandExecutor {
 			s.sendMessage(prefix + "§cIncorrect command! Usage: /addkey [amount]");
 			return true;
 		}
+	}
+	
+	@SuppressWarnings({ "unused", "deprecation" })
+	public boolean addKeys(Player p, int amount) {
+		
+		Inventory inv = p.getInventory();
+		
+		int itemsininv = 0;
+		
+		for (ItemStack i : inv) {
+			
+			itemsininv++;
+			
+		}
+		
+		if (itemsininv == 36) {
+			
+			p.sendMessage(MainClass.getPrefix() + "§cYour inventory is full, cannot add keys!");
+			p.sendMessage(MainClass.getPrefix() + "§cPlease free up some space and rejoin the server to recieve voting rewards.");
+			return false;
+			
+		}
+		
+		ItemStack key = new ItemStack(Material.TRIPWIRE_HOOK, amount);
+		ItemMeta keym = key.getItemMeta();
+		keym.setDisplayName("§a§lLootChest Key");
+		key.setItemMeta(keym);
+		inv.addItem(key);
+		
+		p.sendMessage(MainClass.getPrefix() + "You added §c" + amount + " §akeys!");
+		p.updateInventory();
+		
+		return true;
+		
 	}
 }
