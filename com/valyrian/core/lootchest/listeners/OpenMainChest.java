@@ -41,6 +41,12 @@ public class OpenMainChest implements Listener {
 		
 		if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 			
+			if (!MainClass.getLCU().isEnabled()) {
+				
+				return;
+				
+			}
+			
 			Player p = e.getPlayer();
 			Inventory inv = p.getInventory();
 			ItemStack item = p.getItemInHand();
