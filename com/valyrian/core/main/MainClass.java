@@ -7,18 +7,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.valyrian.core.essentials.commands.*;
 import com.valyrian.core.essentials.listeners.*;
-import com.valyrian.core.essentials.utils.*;
+import com.valyrian.core.listeners.*;
 import com.valyrian.core.lootchest.commands.*;
 import com.valyrian.core.lootchest.listeners.*;
 import com.valyrian.core.lootchest.utils.*;
-import com.valyrian.core.utils.SendConsoleMessage;
+import com.valyrian.core.utils.*;
+
 
 public class MainClass extends JavaPlugin {
 	
 	SendConsoleMessage c = new SendConsoleMessage();
 	private static MainClass plugin;
 	private static LootChestUtils l = new LootChestUtils();
-	private String prefix = "§7[§bValyrian§7] §a";
+	private static String prefix = "§7[§bValyrian§7] §a";
 	
 	public void onEnable() {
 		c.sendMessage(prefix + "ValyrianCore has been enabled!");
@@ -35,17 +36,24 @@ public class MainClass extends JavaPlugin {
 			
 		}
 		
+		//Core
+		Bukkit.getPluginManager().registerEvents(new OwedKeysAdder(), this);
+		Bukkit.getPluginManager().registerEvents(new PlayerFileCreator(), this);
+		Bukkit.getPluginManager().registerEvents(new VoteListener(), this);
 		
 		//LootChest
 		Bukkit.getPluginManager().registerEvents(new OpenMainChest(), this);
 		Bukkit.getPluginManager().registerEvents(new ChestRewards(), this);
-		Bukkit.getPluginManager().registerEvents(new InvClickEventCanceller(), this);
+		Bukkit.getPluginManager().registerEvents(new LcInvClickEventCanceller(), this);
 		getCommand("lootchest").setExecutor(new LootChestCommand());
 		getCommand("addkey").setExecutor(new AddKeyCommand());
 		getCommand("addchest").setExecutor(new AddChestCommand());
 		
 		//Essentials
 		Bukkit.getPluginManager().registerEvents(new PlayerJoinMessage(), this);
+		Bukkit.getPluginManager().registerEvents(new EnderChestSaver(), this);
+		Bukkit.getPluginManager().registerEvents(new EsInvClickEventCanceller(), this);
+		Bukkit.getPluginManager().registerEvents(new InvSeeUpdateInventory(), this);
 		getCommand("gamemode").setExecutor(new SetGamemodeCommand());
 		getCommand("fly").setExecutor(new FlyCommand());
 		getCommand("ban").setExecutor(new BanCommand());
@@ -57,6 +65,7 @@ public class MainClass extends JavaPlugin {
 		getCommand("chest").setExecutor(new EnderChestCommand());
 		getCommand("time").setExecutor(new TimeCommand());
 		getCommand("weather").setExecutor(new WeatherCommand());
+		getCommand("invsee").setExecutor(new InvSeeCommand());
 		
 	}
 	
