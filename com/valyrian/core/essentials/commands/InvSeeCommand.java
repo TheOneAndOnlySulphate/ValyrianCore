@@ -6,13 +6,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-
 import com.valyrian.core.main.MainClass;
 
 public class InvSeeCommand implements CommandExecutor {
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    @SuppressWarnings("deprecation")
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         
         String prefix = MainClass.getPrefix();
     
@@ -24,6 +23,13 @@ public class InvSeeCommand implements CommandExecutor {
         }
         
         Player s = (Player) sender;
+        
+        if (!(s.hasPermission("vc.invsee"))) {
+        	
+        	s.sendMessage(prefix + "§cYou do not have permission to use this command.");
+        	return true;
+        	
+        }
         
         if (args.length < 1) {
             
@@ -46,15 +52,7 @@ public class InvSeeCommand implements CommandExecutor {
             
             Inventory tinv = t.getInventory();
             
-            Inventory ninv = Bukkit.createInventory(s, 36, args[0] + "'s Inventory");
-            
-            for (ItemStack i : tinv) {
-                
-                ninv.addItem(i);
-                
-            }
-            
-            s.openInventory(ninv);
+            s.openInventory(tinv);
             
         }
         
